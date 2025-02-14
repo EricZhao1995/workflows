@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 import json
 
-url="https://api.seniverse.com/v3/weather/daily.json?key=Sw2wf7z--1_Bqyjby&location=shanghai&language=zh-Hans&unit=c&start=0&days=5"
+url="https://api.seniverse.com/v3/weather/daily.json?key=Sw2wf7z--1_Bqyjby&location=shanghai&language=zh-Hans&unit=c&start=0&days=7"
 
 # 构建请求
 req = request.Request(url)
@@ -25,7 +25,7 @@ df.set_index("日期", inplace=True)
 url2 = "https://open.f.mioffice.cn/open-apis/bot/v2/hook/74c5bdbc-1276-4c49-a6e8-c1f455752379"
 
 daily_forecast = response["results"][0]["daily"]
-message = "上海未来三天天气预报：\n"
+message = "上海未来七天天气预报：\n"
 for day in daily_forecast:
     message += f"{day['date']}: {day['text_day']}，气温{day['low']}~{day['high']}°C，降水量{day['rainfall']}mm，湿度{day['humidity']}%，风力{day['wind_scale']}级\n"
 
