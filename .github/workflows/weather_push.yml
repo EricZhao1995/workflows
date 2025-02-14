@@ -1,0 +1,35 @@
+name: Weather Push  # 这是工作流的名字
+
+# 定义触发条件
+on:
+  schedule:
+    # 使用 cron 表达式每天 08:00 执行
+    - cron: "0 10 * * *"  # 每天 08:00 运行
+  workflow_dispatch:  # 允许手动触发
+
+# 定义工作流的任务
+jobs:
+  run-script:
+    # 定义运行的操作系统
+    runs-on: ubuntu-latest  # 选择最新的 Ubuntu 操作系统环境
+
+    steps:
+      # 第一步：检出仓库中的代码
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # 第二步：设置 Python 环境
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # 设置 Python 版本
+
+      # 第三步：安装依赖
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip  # 升级 pip
+          pip install requests  # 安装所需的依赖（如 requests）
+
+      # 第四步：运行 Python 脚本
+      - name: Run script
+        run: python weather_push.py  # 运行脚本
