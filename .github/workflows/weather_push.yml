@@ -32,4 +32,4 @@ jobs:
 
       # 第四步：运行 Python 脚本
       - name: Run script
-        run: python weather_push.py  # 运行脚本
+        run: python .github/weather_push.py  # 运行脚本
