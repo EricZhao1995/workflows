@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 import json
 
-url="https://api.seniverse.com/v3/weather/daily.json?key=ST3HlYrJOeRT64FAX&location=shanghai&language=zh-Hans&unit=c&start=0&days=5"
+url="https://api.seniverse.com/v3/weather/daily.json?key=Sw2wf7z--1_Bqyjby&location=shanghai&language=zh-Hans&unit=c&start=0&days=5"
 
 # 构建请求
 req = request.Request(url)
