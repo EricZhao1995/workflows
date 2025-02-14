@@ -4,7 +4,7 @@ name: Weather Push  # 这是工作流的名字
 on:
   schedule:
     # 使用 cron 表达式每天 08:00 执行
-    - cron: "0 10 * * *"  # 每天 08:00 运行
+    - cron: "20 17 * * *"  # 每天 08:00 运行
   workflow_dispatch:  # 允许手动触发
 
 # 定义工作流的任务
