@@ -1,5 +1,5 @@
 from urllib import request, parse
-import requests
+import requests 
 
 import pandas as pd
 import json
@@ -41,3 +41,4 @@ response = requests.post(url2, data=json.dumps(payload), headers=headers)
 
 # 打印响应
 print(response.status_code, response.text)
+
