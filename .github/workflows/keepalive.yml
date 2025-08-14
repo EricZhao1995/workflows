@@ -1,0 +1,25 @@
+name: Keepalive
+
+on:
+  schedule:
+    - cron: "0 0 1 * *" # 每月1号 00:00 UTC 运行一次（可改）
+  workflow_dispatch: # 支持手动触发
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create empty commit
+        run: |
+          git commit --allow-empty -m "chore: keep workflow alive $(date -u +"%Y-%m-%d %H:%M:%S UTC")" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push
