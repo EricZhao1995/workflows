@@ -2,8 +2,11 @@ name: Keepalive
 
 on:
   schedule:
-    - cron: "0 0 1 * *" # 每月1号 00:00 UTC 运行一次（可改）
-  workflow_dispatch: # 支持手动触发
+    - cron: "0 0 1 * *" # 每月1号
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   keepalive:
@@ -11,15 +14,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Configure Git
+      - name: Setup Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Create empty commit
+      - name: Switch to main branch
         run: |
-          git commit --allow-empty -m "chore: keep workflow alive $(date -u +"%Y-%m-%d %H:%M:%S UTC")" || echo "No changes to commit"
+          git checkout main
+          git pull origin main
+
+      - name: Create empty commit
+        run: git commit --allow-empty -m "chore: keepalive $(date -u +"%Y-%m-%d %H:%M:%S UTC")" || echo "No changes to commit"
 
       - name: Push changes
-        run: git push
+        run: git push origin main
