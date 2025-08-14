@@ -2,7 +2,7 @@ name: Keepalive
 
 on:
   schedule:
-    - cron: "0 0 1 * *" # 每月1号
+    - cron: "0 0 1 * *"   # 每月 1 日 00:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -12,23 +12,25 @@ jobs:
   keepalive:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Git
+      - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Switch to main branch
+      - name: Ensure main branch
         run: |
-          git checkout main
-          git pull origin main
+          git checkout main || git checkout -b main
+          git pull origin main || true
 
       - name: Create empty commit
-        run: git commit --allow-empty -m "chore: keepalive $(date -u +"%Y-%m-%d %H:%M:%S UTC")" || echo "No changes to commit"
+        run: |
+          TS=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          git commit --allow-empty -m "chore: keepalive ${TS}" || echo "No changes to commit"
 
-      - name: Push changes
+      - name: Push
         run: git push origin main
