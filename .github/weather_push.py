@@ -22,7 +22,7 @@ df.columns = ["日期", "天气", "最高温(°C)", "最低温(°C)", "降水量
 # 设置索引为日期
 df.set_index("日期", inplace=True)
 
-url2 = "https://open.f.mioffice.cn/open-apis/bot/v2/hook/d4777d7d-cf51-49ba-abd0-445bd31099a8"
+url2 = "https://open.feishu.cn/open-apis/bot/v2/hook/5324908e-0abd-45b5-be9a-4a5845cba243"
 
 daily_forecast = response["results"][0]["daily"]
 message = "上海未来三天天气预报：\n"
@@ -41,4 +41,5 @@ response = requests.post(url2, data=json.dumps(payload), headers=headers)
 
 # 打印响应
 print(response.status_code, response.text)
+
 
