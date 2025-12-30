@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 import json
 
-url="https://api.seniverse.com/v3/weather/daily.json?key=ST3HlYrJOeRT64FAX&location=shanghai&language=zh-Hans&unit=c&start=0&days=7"
+url="https://api.seniverse.com/v3/weather/daily.json?key=ST3HlYrJOeRT64FAX&location=shanghai&language=zh-Hans&unit=c&start=0&days=5"
 
 # 构建请求
 req = request.Request(url)
@@ -41,6 +41,7 @@ response = requests.post(url2, data=json.dumps(payload), headers=headers)
 
 # 打印响应
 print(response.status_code, response.text)
+
 
 
 
